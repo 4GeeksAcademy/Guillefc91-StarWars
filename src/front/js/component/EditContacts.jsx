@@ -2,16 +2,17 @@ import React, { useState, useContext } from "react";
 import { Context } from "../store/appContext.js";
 import { useNavigate } from "react-router-dom";
 
-export const AddContacts = () => {
-    const { actions } = useContext(Context);
+export const EditConctacts = () => {
+    const { store,actions } = useContext(Context);
     const navigate = useNavigate();
+    
 
 
     // State para los campos del formulario
-    const [fullName, setFullName] = useState("");
-    const [email, setEmail] = useState("");
-    const [phone, setPhone] = useState("");
-    const [address, setAddress] = useState("");
+    const [fullName, setFullName] = useState(store.currentContacts.name);
+    const [email, setEmail] = useState(store.currentContacts.email);
+    const [phone, setPhone] = useState(store.currentContacts.phone);
+    const [address, setAddress] = useState(store.currentContacts.address);
 
     // Manejar el envío del formulario
     const handleSubmit = (event) => {
@@ -22,8 +23,9 @@ export const AddContacts = () => {
             "phone": phone,
             "address": address
         };
+        actions.editContact(store.currentContacts.id,dataToSend)
+        actions.setCurrentContacts({})
         navigate("/contacts")
-        actions.addContact(dataToSend)
     };
 
     return (

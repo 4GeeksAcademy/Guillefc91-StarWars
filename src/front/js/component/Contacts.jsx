@@ -1,16 +1,19 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext.js";
+import { Link } from "react-router-dom";
 
 export const Contacts = () => {
     const { store, actions } = useContext(Context);
-
+    useEffect(()=>{
+        actions.getContacts();
+    },[])
     return (
         <div>
             <div className="navbar navbar-dark bg-dark p-4">
                 <h1 className="text-light pt-4">Contacts</h1>
-                <a href="/add-contact">
+                <Link to="/add-contact">
                     <button className="btn btn-secondary">Add Contact</button>
-                </a>
+                </Link>
             </div>
             <ul>
                 {/* Mapeando la lista de contactos */}
@@ -18,9 +21,8 @@ export const Contacts = () => {
                     <li key={index}>
                         <div className="col-md-8">
                             <div className="card-body d-flex justify-content-between">
-                                <img
-                                    height="55"
-                                    src="https://starwars.chocobar.net/star-wars-logo.png"
+                                <img className="w-25"
+                                src="https://i.ebayimg.com/images/g/0g8AAOSwkChmEoaY/s-l960.webp"
                                     alt="Contacto"
                                 />
                                 <div>
@@ -43,18 +45,26 @@ export const Contacts = () => {
                                     </p>
                                 </div>
                                 <div className="d-flex justify-content-end">
+
                                     {/* Botón de editar */}
+                                    <Link to="/edit-contact">
                                     <button
                                         className="btn btn-secondary me-2"
-                                        onClick={() => console.log("Editar contacto")}
+                                        onClick={()=>{
+                                            actions.setCurrentContacts(item);
+                                        }}
                                     >
+                                        
                                         <i className="fas fa-pen"></i> Editar
                                     </button>
+                                    </Link>
+                                    
+                                    
                                     
                                     {/* Botón de borrar */}
                                     <button
                                         className="btn btn-danger"
-                                        onClick={() => actions.deleteContact(item.name)}
+                                        onClick={() => actions.deleteContact(item.id)}
                                     >
                                         <i className="fas fa-trash-alt"></i> Borrar
                                     </button>
