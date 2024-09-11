@@ -7,7 +7,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			user:"Guille",
 			currentContacts:{},
 			host_swapi:"https://www.swapi.tech/api",
-			characters:[]
+			characters:[],
+			planets:[]
 		},
 		actions: {
 			createUser: async () => {
@@ -105,6 +106,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const data = await response.json();
 				console.log(data);
 				setStore({characters: data.results})
+				localStorage.setItem("characters", JSON.stringify(data.results))
+			},
+			getPlanets: async () =>{
+				const response = await fetch(`${getStore().host_swapi}/people`)
+				if(!response.ok){
+					return
+				}
+				const data = await response.json();
+				console.log(data);
+				setStore({planets: data.results})
 				localStorage.setItem("characters", JSON.stringify(data.results))
 			}
 		}

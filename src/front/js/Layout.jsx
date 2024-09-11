@@ -14,6 +14,7 @@ import { AddContacts } from "./component/AddContacts.jsx";
 import { Contacts } from "./component/Contacts.jsx";
 import { EditConctacts } from "./component/EditContacts.jsx";
 import { Characters} from "./component/Characters.jsx";
+import { Planets } from "./component/Planets.jsx";
 
 
 //create your first component
@@ -36,6 +37,7 @@ const Layout = () => {
                         <Route element={<Contacts/>} path="/contacts"/>
                         <Route element={<EditConctacts/>} path="/edit-contact"/>
                         <Route element={<Characters/>} path="/characters"/>
+                        <Route element={<Planets/>} path="/planets"/>
                     </Routes>
                     <Footer />
                 </ScrollToTop>

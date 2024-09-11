@@ -3,20 +3,20 @@ import { Link } from "react-router-dom";
 import { Spinner } from "./Spinner.jsx";
 import { Context } from "../store/appContext.js";
 
-export const Characters = () => {
+export const Planets = () => {
     const { store, actions } = useContext(Context);
     useEffect(() => {
-        actions.getCharacters();
+        actions.getPlanets();
     }, [])
 
     return (
         <>
-            {store.characters.length === 0 ? <Spinner /> :
-                store.characters.map((item, index) => {
+            {store.planets.length === 0 ? <Spinner /> :
+                store.planets.map((item, index) => {
                     return (
                         <div className="container m-4 d-flex justify-content-between">
                             <div key={index} className="card " style={{ width: "18rem" }}>
-                                <img src={`https://starwars-visualguide.com/assets/img/characters/${item.uid}.jpg`} className="card-img-top " alt={item.name} />
+                                <img src={`https://starwars-visualguide.com/assets/img/planets/${item.uid}.jpg`} className="card-img-top " alt={item.name} />
                                 <div className="card-body">
                                     <h5 className="card-title d-flex justify-content-center">{item.name}</h5>
                                     <div className="d-flex justify-content-between">
