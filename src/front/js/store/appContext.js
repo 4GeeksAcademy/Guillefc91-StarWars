@@ -24,6 +24,7 @@ const injectContext = PassedComponent => {
 		useEffect(() => {
 		
 			state.actions.getContacts();
+			state.actions.getCharacters();
 			
 			 // <---- calling this function from the flux.js actions
 		}, []);

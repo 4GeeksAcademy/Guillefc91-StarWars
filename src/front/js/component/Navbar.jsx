@@ -4,25 +4,25 @@ import { Link } from "react-router-dom";
 export const Navbar = () => {
 
 	return (
-		<nav className="navbar navbar-dark bg-dark ">
+		<nav className="navbar navbar-dark bg-black ">
 			<div className="container-fluid d-flex justify-content-between mx-md-4 mt-4 mb-1">
 				<div>
-					<a className="navbar-brand" href="/">
+					<Link className="navbar-brand" to="/">
 						<img height="55" src="https://starwars.chocobar.net/star-wars-logo.png"/>
-					</a>
+					</Link>
 					</div>
 					<div>
 						<ul className="nav me-auto mb-2 mb-lg-0">
 						<li className="nav-item">
-							<a className="nav-link link-secondary" href="/characters">Characters</a>
+							<Link className="nav-link link-secondary" to="/characters">Characters</Link>
 						</li>
 						<li className="nav-item">
-							<a className="nav-link link-secondary" href="/planets">Planets</a></li>
+							<Link className="nav-link link-secondary" to="/planets">Planets</Link></li>
 						<li className="nav-item">
-							<a className="nav-link link-secondary" href="/starships">Starships</a>
+							<Link className="nav-link link-secondary" to="/starships">Starships</Link>
 						</li>
 						<li className="nav-item">
-							<a className="nav-link link-secondary" href="/contacts">Contacts</a>
+							<Link className="nav-link link-secondary" to="/contacts">Contacts</Link>
 						</li>
 						<li className="nav-item"><div className="dropdown">
 							<button className="btn btn-secondary dropdown-toggle" type="button"

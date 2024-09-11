@@ -5,7 +5,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			message: null,
 			contactsCard: [],
 			user:"Guille",
-			currentContacts:{}
+			currentContacts:{},
+			host_swapi:"https://www.swapi.tech/api",
+			characters:[]
 		},
 		actions: {
 			createUser: async () => {
@@ -94,6 +96,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			setCurrentContacts: (contacts) =>{
 				setStore({currentContacts:contacts})
+			},
+			getCharacters: async () =>{
+				const response = await fetch(`${getStore().host_swapi}/people`)
+				if(!response.ok){
+					return
+				}
+				const data = await response.json();
+				console.log(data);
+				setStore({characters: data.results})
+				localStorage.setItem("characters", JSON.stringify(data.results))
 			}
 		}
 	};
