@@ -4,3 +4,21 @@
 body{
     background:grey;
 }
+.
+div > favorite-btn {
+    color:grey; 
+    font-size: 4rem; 
+    border: none;
+    background: none;
+    cursor: pointer;
+    transition: color 0.3s ease; 
+   
+  }
+  
+  .favorite-btn:hover {
+    color: red; 
+  }
+  
+  .favorite-btn:focus {
+    outline: none; /* Quita el borde al hacer foco */
+  }
