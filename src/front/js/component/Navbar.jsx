@@ -1,18 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { Context } from "../store/appContext.js";
+import { Favorite } from "./Favorite.jsx";
+
 
 export const Navbar = () => {
-
+	const { store, actions } = useContext(Context)
 	return (
 		<nav className="navbar navbar-dark bg-black ">
-			<div className="container-fluid d-flex justify-content-between mx-md-4 mt-4 mb-1">
+			<div className="container-fluid d-flex justify-content-between ">
 				<div>
 					<Link className="navbar-brand" to="/">
-						<img height="55" src="https://starwars.chocobar.net/star-wars-logo.png"/>
+						<img height="62" src="https://starwars.chocobar.net/star-wars-logo.png" />
 					</Link>
-					</div>
-					<div>
-						<ul className="nav me-auto mb-2 mb-lg-0">
+				</div>
+				<div>
+					<ul className="nav me-auto mb-2 mb-lg-0">
 						<li className="nav-item">
 							<Link className="nav-link link-secondary" to="/characters">Characters</Link>
 						</li>
@@ -24,18 +27,8 @@ export const Navbar = () => {
 						<li className="nav-item">
 							<Link className="nav-link link-secondary" to="/contacts">Contacts</Link>
 						</li>
-						<li className="nav-item"><div className="dropdown">
-							<button className="btn btn-secondary dropdown-toggle" type="button"
-								data-bs-toggle="dropdown" aria-expanded="false">Favorites
-								<span className="position-absolute top-0 start-100 translate-middle badge 
-								rounded-pill bg-warning text-dark">0</span>
-							</button>
-							<ul className="dropdown-menu dropdown-menu-dark dropdown-menu-lg-end">
-								<li>
-									<span className="dropdown-item">No favorites selected</span>
-								</li>
-							</ul>
-						</div>
+						<li className="nav-item">
+							<Favorite/>
 						</li>
 					</ul>
 				</div>
