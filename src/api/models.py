@@ -43,7 +43,7 @@ class Medias(db.Model):
     url = db.Column(db.String)
 
 
-class CharactersFavorites(db.Model):
+class Characters_Favorites(db.Model):
     id = db.column(db.Integer, primary_key=True)
 
 
@@ -59,7 +59,7 @@ class Characters(db.Model):
     gender = db.column(db.String, unique=False,nullable=False)
 
 
-class Planets_favorites(db.Model):
+class Planets_Favorites(db.Model):
     id = db.column(db.Integer, primary_key=True)
     name = db.column(db.String, unique=True, nullable=False)
     diameter = db.column(db.String, unique=False, nullable=False)
@@ -71,5 +71,5 @@ class Planets_favorites(db.Model):
     terrain = db.column(db.String, unique=False,nullable=False)
 
 
-class Planets_Favorites(db.Model):
+class Planets(db.Model):
     id = db.column(db.Integer, primary_key=True)
