@@ -1,4 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
 
 
 db = SQLAlchemy()
@@ -28,13 +29,21 @@ class Posts(db.Model):
     title = db.Column(db.String, unique=False, nullable=False)
     description = db.Column(db.String, unique=False, nullable=True)
     body = db.Column(db.String, unique=False, nullable=False)
-    date = db.Column(db.DateTime, nullable=False)  # Valor por defecto
+    date = db.Column(db.DateTime, nullable=False, default=datetime.now)  # Valor por defecto
     image_url = db.Column(db.String)   # La url, la obtenmos de cloudinary
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     user_to = db.relationship('Users', foreign_keys=[user_id], backref=db.backref('post_to', lazy='select'))
 
     def __repr__(self):
          return f'post:{self.id} - {self.title}'
+    
+    def serialize(self):
+        return {'id': self.id,
+                'title': self.title,
+                'description': self.description,
+                'body': self.body,
+                'date': self.date,
+                'image_url': self.image_url}
     
 
 class Comments(db.Model):
@@ -84,6 +93,19 @@ class Characters(db.Model):
     eye_color = db.Column(db.String, unique=False, nullable=False)
     birth_year = db.Column(db.String, unique=False,nullable=False)
     gender = db.Column(db.String, unique=False,nullable=False)
+
+    def __repr__(self):
+         return f'post:{self.id} - {self.title}'
+    
+    def serialize(self):
+        return {'id': self.id,
+                'name': self.name,
+                'mass': self.mass,
+                'hair_color': self.hair_color,
+                'skin_color': self.skin_color,
+                'eye_color': self.eye_color,
+                'birth_year': self.birth_year,
+                'gender': self.gender}
 
 
 class Planets_Favorites(db.Model):
