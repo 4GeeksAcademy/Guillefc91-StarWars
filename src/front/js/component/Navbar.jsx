@@ -19,6 +19,7 @@ export const Navbar = () => {
 						<li className="nav-item">
 							<Link className="nav-link link-secondary" to="/characters">Characters</Link>
 						</li>
+						
 						<li className="nav-item">
 							<Link className="nav-link link-secondary" to="/planets">Planets</Link></li>
 						<li className="nav-item">
@@ -29,6 +30,12 @@ export const Navbar = () => {
 						</li>
 						<li className="nav-item">
 							<Favorite/>
+						</li>
+						<li className="nav-item">
+							<Link className="nav-link link-success" to="/login">Login</Link>
+						</li>
+						<li className="nav-item">
+							<Link className="nav-link link-primary" to="/signup">Sing Up</Link>
 						</li>
 					</ul>
 				</div>
