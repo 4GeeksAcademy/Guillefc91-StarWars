@@ -54,6 +54,7 @@ class Comments(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     user_to = db.relationship('Users',foreign_keys=[user_id],backref=db.backref('comments_to', lazy='select'))
 
+
 class Medias(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     media_type = db.Column(db.Enum('image', 'video', 'podcast', name='media_type'))
@@ -71,7 +72,6 @@ class Followers(db.Model):
 
     def __repr__(self):
          return f'Following:{self.following_id} - follower:{self.follower_id}'
-
 
 
 class Characters_Favorites(db.Model):
@@ -92,10 +92,10 @@ class Characters(db.Model):
     skin_color = db.Column(db.String, unique=False, nullable=False)
     eye_color = db.Column(db.String, unique=False, nullable=False)
     birth_year = db.Column(db.String, unique=False,nullable=False)
-    gender = db.Column(db.String, unique=False,nullable=False)
+    gender = db.Column(db.String, unique=False,nullable=True)
 
     def __repr__(self):
-         return f'post:{self.id} - {self.title}'
+         return f'post:{self.id} - {self.name}'
     
     def serialize(self):
         return {'id': self.id,
@@ -110,6 +110,15 @@ class Characters(db.Model):
 
 class Planets_Favorites(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    user_to = db.relationship('Users', foreign_keys=[user_id],                                      backref=db.backref('planets_favorites_to', lazy='select'))
+    planet_id = db.Column(db.Integer, db.ForeignKey('planets.id'))
+    planet_to = db.relationship('Planets', foreign_keys=[planet_id], 
+                                              backref=db.backref('planets_favorites_to', lazy='select'))
+    
+
+class Planets(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, unique=True, nullable=False)
     diameter = db.Column(db.String, unique=False, nullable=False)
     rotation_period = db.Column(db.String, unique=False, nullable=False)
@@ -118,17 +127,7 @@ class Planets_Favorites(db.Model):
     population = db.Column(db.String, unique=False, nullable=False)
     climate = db.Column(db.String, unique=False,nullable=False)
     terrain = db.Column(db.String, unique=False,nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    user_to = db.relationship('Users', foreign_keys=[user_id], 
-                                              backref=db.backref('planets_favorites_to', lazy='select'))
-    planet_id = db.Column(db.Integer, db.ForeignKey('planets.id'))
-    planet_to = db.relationship('Planets', foreign_keys=[planet_id], 
-                                              backref=db.backref('planets_favorites_to', lazy='select'))
     
-
-
-class Planets(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
 
 
 class Favorites(db.Model):

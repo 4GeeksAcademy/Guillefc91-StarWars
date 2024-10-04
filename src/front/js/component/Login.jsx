@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useContext } from "react/cjs/react.production.min";
+import { Context } from "../store/appContext";
 
 export const Login = () => {
     return (
@@ -26,7 +28,7 @@ export const Login = () => {
 
                         <button type="submit" className="btn btn-primary btn-block mt-2">Iniciar Sesión</button>
 
-                        <p className="mt-3 text-center">¿No tienes cuenta? <a href="/signup">Regístrate</a></p>
+                        <p className="mt-3 text-center">¿No tienes cuenta? <Link to="/signup">Regístrate</Link></p>
                     </form>
                 </div>
             </div>

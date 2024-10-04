@@ -21,7 +21,7 @@ export const SingUp = () =>{
                 
                 <button type="submit" className=" btn btn-primary btn-block mt-2">Registrarse</button>
                
-                <p className="mt-3 text-center">¿Ya tienes una cuenta? <a href="/login">Inicia sesión</a></p>
+                <p className="mt-3 text-center">¿Ya tienes una cuenta? <Link to="/login">Inicia sesión</Link></p>
             </form>
         </div>
     </div>
