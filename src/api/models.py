@@ -129,3 +129,17 @@ class Planets_Favorites(db.Model):
 
 class Planets(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+
+
+class Favorites(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    item_type = db.Column(db.String(50), nullable=False)  # Puede ser 'post', 'character', etc.
+    item_id = db.Column(db.Integer, nullable=False)  # ID del item favorito
+
+    def serialize(self):
+        return {
+            'id': self.id,
+            'item_type': self.item_type,
+            'item_id': self.item_id
+        }
