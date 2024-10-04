@@ -26,6 +26,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return
 				}
 			},
+		
 			getContacts: async () => {
 				const uri = `${getStore().host}/agendas/${getStore().user}`;
 				const options = {
