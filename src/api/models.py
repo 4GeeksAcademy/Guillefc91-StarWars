@@ -128,6 +128,8 @@ class Planets(db.Model):
     climate = db.Column(db.String, unique=False,nullable=False)
     terrain = db.Column(db.String, unique=False,nullable=False)
     
+    def __repr__(self):
+         return f'post:{self.id} - {self.name}'
 
 
 class Favorites(db.Model):
