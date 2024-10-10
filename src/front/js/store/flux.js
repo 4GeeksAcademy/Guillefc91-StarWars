@@ -4,7 +4,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			host: "https://playground.4geeks.com/contact",
 			message: null,
 			contactsCard: [],
-			user: "Guille",
+			user: "",
 			currentContacts: {},
 			host_swapi: "https://www.swapi.tech/api",
 			characters: [],
@@ -16,6 +16,55 @@ const getState = ({ getStore, getActions, setStore }) => {
 			favorites: []
 		},
 		actions: {
+			login:async (dataToSend) => {
+				const uri = `${process.env.BACKEND_URL}/api/login`
+				const options = {
+					method: "POST",
+					headers:{
+						"Content-type": "application/json"
+					},
+					body: JSON.stringify(dataToSend)
+				}
+				const response = await fetch(uri,options)
+				if (!response.ok){
+					console.log("Error", response.status, response.statusText)
+				}
+				const data = await response.json()
+				console.log(data)
+				localStorage.setItem("token",data.access_token)
+				localStorage.setItem("user", JSON.stringify(data.results))
+				setStore({isLoged: true, user: data.results.email})
+			},
+			logout: () =>{
+				setStore({isLoged: false, user: ""})
+				localStorage.removeItem("token")
+				localStorage.removeItem("user")
+			},
+			isLogged: () =>{
+				token = localStorage.getItem("token")
+				if(token){
+					userData = JSON.parse(localStorage.getItem("user"))
+					setStore({isLoged: true, user: userData.email})
+				}
+			},
+			accessDenied: async () =>{
+				const token = localStorage.getItem("token")
+				const uri = `${process.env.BACKEND_URL}/api/protected`
+				const options = {
+					method: "GET",
+					headers:{
+						"Content-type": "application/json",
+						"Autorization":`Bearer ${token} `
+					}
+				}
+				const response = await fetch(uri, options)
+				if (!response.ok) {
+					console.log("Error", response.status)
+					return
+				}
+				const data = await response.json()
+				console.log(data)
+			},
 			createUser: async () => {
 				const uri = `${getStore().host}/agendas/${getStore().user}`;
 				const options = {

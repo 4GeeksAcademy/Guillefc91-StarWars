@@ -25,6 +25,7 @@ const injectContext = PassedComponent => {
 		
 			state.actions.getContacts();
 			state.actions.getCharacters();
+			//state.actions.isLogged();
 			
 			 // <---- calling this function from the flux.js actions
 		}, []);

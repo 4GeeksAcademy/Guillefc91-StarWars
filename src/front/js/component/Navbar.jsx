@@ -1,11 +1,20 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext.js";
 import { Favorite } from "./Favorite.jsx";
 
 
 export const Navbar = () => {
 	const { store, actions } = useContext(Context)
+	const navigate = useNavigate()
+	const handleLogin = () =>{
+		if(store.isLoged){
+			actions.logout()
+		}
+		else{
+			navigate("/login")
+		}
+	}
 	return (
 		<nav className="navbar navbar-dark bg-black ">
 			<div className="container-fluid d-flex justify-content-between ">
@@ -32,10 +41,16 @@ export const Navbar = () => {
 							<Favorite/>
 						</li>
 						<li className="nav-item">
-							<Link className="nav-link link-success" to="/login">Login</Link>
+							<Link className="nav-link link-success" to="/login">
+							<button className= "btn btn-success" onClick={handleLogin}>
+							{store.isLoged ? "Logout" : "Login"}
+							</button></Link>
 						</li>
 						<li className="nav-item">
-							<Link className="nav-link link-primary" to="/signup">Sing Up</Link>
+							<Link className="nav-link link-primary" to="/signup">
+							<button className= "btn btn-primary">Sing Up</button>
+
+							</Link>
 						</li>
 					</ul>
 				</div>
