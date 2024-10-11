@@ -12,11 +12,12 @@ export const Login = () => {
     const handleEmail = (event) => setEmail(event.target.value);
     const handlePassword = (event) => setPassword(event.target.value);
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         const dataToSend = { email, password };
         console.log(dataToSend);
-        actions.login(dataToSend)
+        await actions.login(dataToSend)
+        console.log(store.isLoged)
         if(store.isLoged){
             navigate("/")
         } else{

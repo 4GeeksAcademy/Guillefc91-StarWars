@@ -121,8 +121,6 @@ def protected():
     return response_body, 200
 
 
-
-
 # Endpoints
 @api.route('/characters', methods=['GET'])
 def characters():
@@ -214,3 +212,19 @@ def get_users():
     return response_body, 201  
 
 
+@api.route("/signup", methods=["POST"])
+def signup():
+    response_body = {}
+    data = request.json
+    email = data.get("email", None)
+    password = request.json.get("password", None)
+    user = Users(email=email, password=password, is_active=True, is_admin=False)
+    db.session.add(user)
+    db.session.commit()
+    if not user:
+        response_body['message'] = 'Bad email or password'
+        return response_body, 401
+    print('************ Valor de user *************:', user.serialize())
+    response_body['message'] = f'Registrado {email}'
+    response_body['results'] = user.serialize()
+    return response_body, 200

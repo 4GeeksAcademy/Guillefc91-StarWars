@@ -5,6 +5,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			message: null,
 			contactsCard: [],
 			user: "",
+			isLoged:false,
 			currentContacts: {},
 			host_swapi: "https://www.swapi.tech/api",
 			characters: [],
@@ -16,6 +17,22 @@ const getState = ({ getStore, getActions, setStore }) => {
 			favorites: []
 		},
 		actions: {
+			registerUser:async (dataToSend) => {
+				const uri = `${process.env.BACKEND_URL}/api/signup`
+				const options = {
+					method: "POST",
+					headers:{
+						"Content-type": "application/json"
+					},
+					body: JSON.stringify(dataToSend)
+				}
+				const response = await fetch(uri,options)
+				if (!response.ok){
+					console.log("Error", response.status, response.statusText)
+				}
+				const data = await response.json()
+				console.log(data)
+			},
 			login:async (dataToSend) => {
 				const uri = `${process.env.BACKEND_URL}/api/login`
 				const options = {
